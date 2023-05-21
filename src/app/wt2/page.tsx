@@ -18,7 +18,7 @@ export default function Home() {
 
     useEffect(() => {
         setSelected('wt-2');
-    }, [setSelected]);
+    }, []);
 
     return (
         <div className='flex justify-center'>

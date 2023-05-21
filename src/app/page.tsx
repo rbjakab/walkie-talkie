@@ -18,7 +18,7 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         setSelected('wt-1');
-    }, [setSelected]);
+    }, []);
 
     return (
         <div className='flex justify-center'>
