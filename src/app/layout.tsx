@@ -2,7 +2,7 @@ import './globals.css';
 
 import { ContextWrapper } from '@/context/ContextWrapper';
 import Navbar from '../../components/Navbar';
-import Sidebar from '../../components/Sidebar'; // Import the Sidebar component
+import Sidebar from '../../components/Sidebar';
 
 export const metadata = {
     title: 'Create Next App',

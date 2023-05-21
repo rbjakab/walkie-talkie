@@ -16,7 +16,6 @@ export default function Home() {
         return <Welcome />;
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         setSelected('wt-2');
     }, [setSelected]);

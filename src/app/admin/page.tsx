@@ -5,14 +5,6 @@ import { useRouter } from 'next/navigation';
 
 function Page() {
     const { user } = useAuthContext();
-    const router = useRouter();
-
-    // React.useEffect(() => {
-    //     if (user == null) {
-    //         // router.push('/');
-    //         // return <p>No no no.</p>;
-    //     }
-    // }, [user, router]);
 
     if (user == null) {
         return <p>No no no.</p>;

@@ -11,8 +11,6 @@ const Sidebar = () => {
         return null;
     }
 
-    console.log(selected);
-
     const listOfWalkieTalkies = [
         { id: 'wt-1', title: 'Walkie Talkie 1', url: '/' },
         { id: 'wt-2', title: 'Walkie Talkie 2', url: '/wt2' },

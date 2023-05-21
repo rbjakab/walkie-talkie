@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+var nextConfig = {
     env: {
         BASE_URL: process.env.BASE_URL,
     },
