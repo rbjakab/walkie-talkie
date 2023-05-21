@@ -4,6 +4,7 @@ import { db } from '@/firebase/config';
 import { query, orderBy, collection, getDocs, addDoc } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { Timestamp } from 'firebase/firestore';
+import Loading from './Loading';
 
 interface Message {
     text: string;
@@ -53,7 +54,9 @@ const MessageContainer: React.FC<MessageContainerProps> = ({ owner, isTransmitti
         setInputValue(e.target.value);
     };
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div className='p-4'>
