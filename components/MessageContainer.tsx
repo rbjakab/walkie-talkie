@@ -8,6 +8,7 @@ interface Message {
 
 interface MessageContainerProps {
     owner: string;
+    isTransmitting: boolean;
 }
 
 const dummyMessages: Message[] = [
@@ -28,7 +29,7 @@ const dummyMessages: Message[] = [
     },
 ];
 
-const MessageContainer: React.FC<MessageContainerProps> = ({ owner }) => {
+const MessageContainer: React.FC<MessageContainerProps> = ({ owner, isTransmitting }) => {
     const [messages, setMessages] = useState<Message[]>(dummyMessages);
     const [inputValue, setInputValue] = useState('');
 
@@ -54,7 +55,7 @@ const MessageContainer: React.FC<MessageContainerProps> = ({ owner }) => {
 
     return (
         <div className='p-4'>
-            <h2 className='text-2xl mb-4'>Message Container</h2>
+            <h2 className='text-2xl mb-4 flex flex-col items-center'>Messages</h2>
 
             <div className='space-y-2'>
                 {messages.map((message) => (
@@ -76,12 +77,21 @@ const MessageContainer: React.FC<MessageContainerProps> = ({ owner }) => {
                     type='text'
                     name='message'
                     placeholder='Enter a message'
-                    className='p-2 border border-gray-300 rounded-md'
+                    className={`p-2 border border-gray-300 rounded-md ${
+                        !isTransmitting ? 'disabled' : ''
+                    }`}
                     value={inputValue}
                     onChange={handleChange}
+                    disabled={!isTransmitting}
                 />
-                <button type='submit' className='ml-2 px-4 py-2 bg-blue-500 text-white rounded-md'>
-                    Add Message
+                <button
+                    type='submit'
+                    className={`ml-2 px-4 py-2 bg-blue-500 text-white rounded-md ${
+                        !isTransmitting ? 'disabled' : ''
+                    }`}
+                    disabled={!isTransmitting}
+                >
+                    Send Message
                 </button>
             </form>
         </div>

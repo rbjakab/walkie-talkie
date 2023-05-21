@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.disabled {
+    background-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}

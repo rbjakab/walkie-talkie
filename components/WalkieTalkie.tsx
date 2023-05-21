@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-const WalkieTalkie = (): JSX.Element => {
+interface WalkieTalkieProps {
+    handleTransmittingChange: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const WalkieTalkie = ({ handleTransmittingChange }: WalkieTalkieProps): JSX.Element => {
     const [isTransmitting, setIsTransmitting] = useState<boolean>(false);
     const [periods, setPeriods] = useState<string>('');
 
@@ -25,6 +29,7 @@ const WalkieTalkie = (): JSX.Element => {
 
     const handleClick = (): void => {
         setIsTransmitting(!isTransmitting);
+        handleTransmittingChange(!isTransmitting);
     };
 
     return (
