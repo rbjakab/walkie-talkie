@@ -11,14 +11,14 @@ export default function Home() {
     const { setSelected } = useSelectedContext();
     const [isTransmitting, setIsTransmitting] = useState<boolean>(false);
 
-    if (user == null) {
-        return <Welcome />;
-    }
-
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         setSelected('wt-1');
     }, []);
+
+    if (user == null) {
+        return <Welcome />;
+    }
 
     return (
         <div className='flex justify-center'>
