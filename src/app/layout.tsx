@@ -1,6 +1,6 @@
 import './globals.css';
 
-import { AuthContextProvider } from '@/context/AuthContext';
+import { ContextWrapper } from '@/context/ContextWrapper';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar'; // Import the Sidebar component
 
@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang='en'>
             <head></head>
             <body>
-                <AuthContextProvider>
+                <ContextWrapper>
                     <header>
                         <Navbar />
                     </header>
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <Sidebar />
                         <main className='flex-grow'>{children}</main>
                     </div>
-                </AuthContextProvider>
+                </ContextWrapper>
             </body>
         </html>
     );

@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
-
+import { useErrorContext } from '@/context/ErrorContext';
 interface Message {
     id: number;
     text: string;
@@ -32,8 +32,14 @@ const dummyMessages: Message[] = [
 const MessageContainer: React.FC<MessageContainerProps> = ({ owner, isTransmitting }) => {
     const [messages, setMessages] = useState<Message[]>(dummyMessages);
     const [inputValue, setInputValue] = useState('');
+    const { setError } = useErrorContext();
 
     const addMessage = (text: string) => {
+        if (!text) {
+            setError("You can't send an empty message, please try again.");
+            return;
+        }
+
         const newMessage: Message = {
             id: Date.now(),
             text,
