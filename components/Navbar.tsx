@@ -3,7 +3,7 @@ import { useAuthContext } from '@/context/AuthContext';
 import Link from 'next/link';
 import signOut from '@/firebase/auth/signout';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
     const { user } = useAuthContext();
 
     return (
@@ -42,12 +42,12 @@ const Navbar: React.FC = () => {
                                     >
                                         Sign Out
                                     </button>
-                                    <Link
+                                    {/* <Link
                                         href='/admin'
                                         className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
                                     >
                                         Admin
-                                    </Link>
+                                    </Link> */}
                                     <p className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
                                         {user.email}
                                     </p>

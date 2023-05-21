@@ -2,6 +2,7 @@ import './globals.css';
 
 import { AuthContextProvider } from '@/context/AuthContext';
 import Navbar from '../../components/Navbar';
+import Sidebar from '../../components/Sidebar'; // Import the Sidebar component
 
 export const metadata = {
     title: 'Create Next App',
@@ -18,7 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <Navbar />
                     </header>
 
-                    {children}
+                    <div className='flex'>
+                        <Sidebar />
+                        <main className='flex-grow'>{children}</main>
+                    </div>
                 </AuthContextProvider>
             </body>
         </html>

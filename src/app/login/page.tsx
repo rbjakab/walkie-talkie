@@ -3,7 +3,7 @@ import logIn from '@/firebase/auth/login';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const SignIn: React.FC = () => {
+const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
@@ -19,7 +19,7 @@ const SignIn: React.FC = () => {
 
         // else successful
         console.log(result);
-        return router.push('/admin');
+        return router.push('/');
     };
 
     return (
