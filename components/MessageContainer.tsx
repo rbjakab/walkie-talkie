@@ -1,9 +1,14 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { useErrorContext } from '@/context/ErrorContext';
+import { db } from '@/firebase/config';
+import { query, orderBy, collection, getDocs, addDoc } from 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { Timestamp } from 'firebase/firestore';
+
 interface Message {
-    id: number;
     text: string;
     owner: string;
+    createdAt: Timestamp;
 }
 
 interface MessageContainerProps {
@@ -11,47 +16,36 @@ interface MessageContainerProps {
     isTransmitting: boolean;
 }
 
-const dummyMessages: Message[] = [
-    {
-        id: 1,
-        text: 'Hello',
-        owner: 'wt-1',
-    },
-    {
-        id: 2,
-        text: 'Hi',
-        owner: 'wt-2',
-    },
-    {
-        id: 3,
-        text: 'How are you?',
-        owner: 'wt-1',
-    },
-];
-
 const MessageContainer: React.FC<MessageContainerProps> = ({ owner, isTransmitting }) => {
-    const [messages, setMessages] = useState<Message[]>(dummyMessages);
+    const messagesRef = collection(db, 'messages');
+    const messagesQuery = query(messagesRef, orderBy('createdAt'));
+    const [messages, loading, error] = useCollectionData(messagesQuery);
+
     const [inputValue, setInputValue] = useState('');
     const { setError } = useErrorContext();
 
-    const addMessage = (text: string) => {
+    const sendMessage = async (text: string) => {
         if (!text) {
             setError("You can't send an empty message, please try again.");
             return;
         }
 
         const newMessage: Message = {
-            id: Date.now(),
             text,
             owner,
+            createdAt: Timestamp.now(),
         };
 
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        try {
+            await addDoc(messagesRef, newMessage);
+        } catch (err) {
+            console.error('Error adding document: ', err);
+        }
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        addMessage(inputValue);
+        sendMessage(inputValue);
         setInputValue('');
     };
 
@@ -59,23 +53,26 @@ const MessageContainer: React.FC<MessageContainerProps> = ({ owner, isTransmitti
         setInputValue(e.target.value);
     };
 
+    if (loading) return <div>Loading...</div>;
+
     return (
         <div className='p-4'>
             <h2 className='text-2xl mb-4 flex flex-col items-center'>Messages</h2>
 
             <div className='space-y-2'>
-                {messages.map((message) => (
-                    <div
-                        key={message.id}
-                        className={`p-2 rounded-md ${
-                            message.owner === owner
-                                ? 'bg-blue-200 text-right'
-                                : 'bg-gray-200 text-left'
-                        }`}
-                    >
-                        {message.text}
-                    </div>
-                ))}
+                {messages &&
+                    messages.map((message) => (
+                        <div
+                            key={message.createdAt.seconds + message.owner}
+                            className={`p-2 rounded-md ${
+                                message.owner === owner
+                                    ? 'bg-blue-200 text-right'
+                                    : 'bg-gray-200 text-left'
+                            }`}
+                        >
+                            {message.text}
+                        </div>
+                    ))}
             </div>
 
             <form onSubmit={handleSubmit} className='mt-4'>

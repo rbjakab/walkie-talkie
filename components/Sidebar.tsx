@@ -1,7 +1,6 @@
 'use client';
 import { useAuthContext } from '@/context/AuthContext';
 import Link from 'next/link';
-import signOut from '@/firebase/auth/signout';
 
 const Sidebar = () => {
     const { user } = useAuthContext();

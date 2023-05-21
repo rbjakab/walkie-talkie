@@ -1,7 +1,7 @@
 'use client';
 import { useAuthContext } from '@/context/AuthContext';
 import Link from 'next/link';
-import signOut from '@/firebase/auth/signout';
+import logOut from '@/firebase/auth/logOut';
 
 const Navbar = () => {
     const { user } = useAuthContext();
@@ -38,7 +38,7 @@ const Navbar = () => {
                                 <>
                                     <button
                                         className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-                                        onClick={() => signOut()}
+                                        onClick={() => logOut()}
                                     >
                                         Sign Out
                                     </button>
