@@ -34,6 +34,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         return () => unsubscribe();
     }, []);
 
+    // TODO
     return (
         <AuthContext.Provider value={{ user }}>
             {loading ? <div>Loading...</div> : children}

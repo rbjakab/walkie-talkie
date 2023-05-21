@@ -1,9 +1,10 @@
 'use client';
 import { useAuthContext } from '@/context/AuthContext';
-import Welcome from '../../components/Welcome';
-import WalkieTalkie from '../../components/WalkieTalkie';
-import MessageContainer from '../../components/MessageContainer';
+
 import { useEffect, useState } from 'react';
+import Welcome from '../../../components/Welcome';
+import WalkieTalkie from '../../../components/WalkieTalkie';
+import MessageContainer from '../../../components/MessageContainer';
 import { useSelectedContext } from '@/context/SelectedWalkieTalkie';
 
 export default function Home() {
@@ -17,13 +18,13 @@ export default function Home() {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-        setSelected('wt-1');
+        setSelected('wt-2');
     }, [setSelected]);
 
     return (
         <div className='flex justify-center'>
             <WalkieTalkie handleTransmittingChange={setIsTransmitting} />
-            <MessageContainer owner='wt-1' isTransmitting={isTransmitting} />
+            <MessageContainer owner='wt-2' isTransmitting={isTransmitting} />
         </div>
     );
 }
